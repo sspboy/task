@@ -8,9 +8,7 @@
 
 // while(true){
 
-//     // 请求任务：数据库请求任务详情
-
-//     var Task_obj = false
+//     var Task_obj = false;// 请求任务：数据库请求任务详情
 
 //     if(Task_obj == false){  // 任务为空false：等待10秒，再次请求；
         
@@ -32,8 +30,3 @@
 
 //     }
 // }
-
-
-var circle = require('/sdcard/脚本/test.js');// 再做为模块引用执行
-var res = circle.area()
-console.log(res);
