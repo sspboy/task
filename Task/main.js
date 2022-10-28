@@ -1,25 +1,39 @@
-"nodejs";
+// "nodejs";
 
-const { showToast } = require('toast');
+// const { showToast } = require('toast');
 
-console.log(process.versions);
+// console.log(process.versions);
 
-showToast('Hello, Auto.js Pro with Node.js!');
+// showToast('Hello, Auto.js Pro with Node.js!');
 
-// 第一部分
+// while(true){
 
-// 设备心跳
-// 完成注册
-// 完成更新登录时间
-// 监听设备的在线状态：在线、离线
+//     // 请求任务：数据库请求任务详情
+
+//     var Task_obj = false
+
+//     if(Task_obj == false){  // 任务为空false：等待10秒，再次请求；
+        
+//         sleep(4000)
+
+//         console.log('请求的任务未空-心跳一次')
+
+//     }else{      // 任务不为空：执行任务
+
+//         // 加载js脚本
+
+//         // 执行脚本>回写结果到数据库
+
+//         sleep(5000);
+
+//         console.log('我在勤劳的执行任务ing....');
+
+//         console.log('执行任务完成ok，心跳一次');
+
+//     }
+// }
 
 
-// 第二部分
-// 设备请求任务
-// 通过接口获取任务信息
-// 通过任务单文件完成任务
-// 保存任务完成状态、日志、
-
-//  第三部分
-// 编写当文件脚本任务
-// douyin/快手
+var circle = require('/sdcard/脚本/test.js');// 再做为模块引用执行
+var res = circle.area()
+console.log(res);
