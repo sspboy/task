@@ -1,8 +1,10 @@
-// 抖音脚本任务开始
 
+// 抖音脚本任务开始
+auto.waitFor()
 var name= app.getPackageName('抖音极速版')// 打开抖音应用
 app.launch(name)
 sleep(5000)
+
 
 // 点击来赚钱
 click(573,2249);
@@ -10,37 +12,57 @@ click(573,2249);
 
 
 /**签到模块 */
-// sleep(2000)
+sleep(2000)
 
-// if(text('签到提醒').exists()){ // 判断是否'签到提醒'弹出层
+if(text('签到提醒').exists()){ // 判断是否'签到提醒'弹出层
 
-//     console.log('发现-----签到模块')
+    console.log('发现-----签到模块')
 
-// }
+    //点击签到
+    desc('看广告视频再赚').findOne().clickCenter();//判断是否看广告视频再赚
+
+
+}
 
 
 /**看视频 */ 
 sleep(2000)
-
 if(text('看广告赚金币').exists()){      // 判断'看广告视频'
 
     console.log('发现----看广告赚金币')
-    text('看广告赚金币').findOne().clickCenter()    // 点击进入广告查看
+    text('看广告赚金币').findOne().clickCenter()   // 点击进入广告查看
+    sleep(60000) // 等待一分钟 第一次视频广告
 
-    // 获取播放时长
-    // 等待播放时长过后'可领取奖励'
-    // 获取进入下载页面的'返回'按钮
-    // 点击返回
-    // 获取视频播放页面'关闭，按钮、'
+    if(desc('返回').exists()){          // 进入下载页面 
 
-    // 点击'关闭，按钮'
-    // 判断是否'再看一个视频额外获得'
-    // 点击'领取奖励',在看一条视频
+        desc('返回').findOne().clickCenter()
+        sleep(2000)
 
-    // 获取播放时长过后'可领取奖励'
-    // 进入软件下载页面，获取'返回'按钮
-    // 点击返回
-    // 获取视频播放页面'关闭，按钮、'
+        desc('关闭 按钮').findOne().clickCenter()
+        sleep(2000)
+
+        desc('领取奖励').findOne().clickCenter() // 第二次 视频广告
+
+        desc('返回').findOne().clickCenter()
+        desc('关闭 按钮').findOne().clickCenter() 
+
+    }
+
+    if(desc('领取成功').exists()){      // 未进入下载页面
+
+        desc('领取成功').findOne().clickCenter()
+        sleep(2000)
+
+        desc('领取奖励').findOne().clickCenter()    // 第二次 视频广告
+        
+        sleep(45000)
+
+        click(573,1249);
+
+        desc('领取成功').findOne().clickCenter() 
+
+
+    }
 
 
 
@@ -53,6 +75,44 @@ if(text('看广告赚金币').exists()){      // 判断'看广告视频'
 // if(text('开宝箱得金币').exists()){      // 判断'看广告视频'
 
 //     console.log('发现----宝箱')
+//     desc('开宝箱得金币').findOne().clickCenter() 
+//     sleep(2000)
+
+//     desc('看广告视频再赚').findOne().clickCenter() 
+//     sleep(60000) // 等待一分钟 第一次视频广告
+
+
+//     if(desc('返回').exists()){          // 进入下载页面 
+
+//         desc('返回').findOne().clickCenter()
+//         sleep(2000)
+
+//         desc('关闭 按钮').findOne().clickCenter()
+//         sleep(2000)
+
+//         desc('领取奖励').findOne().clickCenter()    // 第二次 视频广告
+
+//         desc('返回').findOne().clickCenter()
+//         desc('关闭 按钮').findOne().clickCenter() 
+
+//     }
+
+//     if(desc('领取成功').exists()){      // 未进入下载页面
+
+//         desc('领取成功').findOne().clickCenter()
+//         sleep(2000)
+
+//         desc('领取奖励').findOne().clickCenter()    // 第二次 视频广告
+
+//         sleep(40000)
+
+//         click(573,1249);
+
+//         desc('领取成功').findOne().clickCenter() 
+
+
+//     }
+
 
 // }
 
@@ -70,4 +130,3 @@ if(text('看广告赚金币').exists()){      // 判断'看广告视频'
 // sleep(2000)
 // swipe(600,1800,600,1000,1000)
 // home() // 回到主页
-
