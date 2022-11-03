@@ -1,73 +1,154 @@
-// 抖音脚本任务开始
+var Tool = require('/sdcard/脚本/Task/script_file/tool.js');
 
-var name= app.getPackageName('抖音极速版')// 打开抖音应用
-app.launch(name)
-sleep(5000)
+// 打开抖音极速版
+Tool.open_app('抖音极速版')
 
-// 点击来赚钱
-click(573,2249);
+
+sleep(6000)// 等待加载页面
+swipe(600,1800,600,1000,1000)
+
+click(573,2249);// 点击来赚钱
+
 
 
 
 /**签到模块 */
-// sleep(2000)
+sleep(5000)
 
-// if(text('签到提醒').exists()){ // 判断是否'签到提醒'弹出层
+if(text('签到提醒').exists()){ // 判断是否'签到提醒'弹出层
 
-//     console.log('发现-----签到模块')
+    console.log('发现-----签到模块')
+    click(600,1440);    //点击签到按钮
+    sleep(2000)
 
-// }
+    text('看广告视频再赚').findOne().clickCenter();//判断是否看广告视频再赚
+
+    sleep(50000) // 等待一分钟 第一次视频广告
+
+    if(desc('返回').exists()){          // 进入下载页面 
+
+        desc('返回').findOne().clickCenter()
+        sleep(2000)
+
+        desc('关闭 按钮').findOne().clickCenter()
+        sleep(2000)
+
+        desc('领取奖励').findOne().clickCenter() // 第二次 视频广告
+        sleep(35000)
+
+        desc('返回').findOne().clickCenter()
+        desc('关闭 按钮').findOne().clickCenter() 
+
+    }
+
+    if(desc('领取成功').exists()){      // 未进入下载页面
+
+        desc('领取成功').findOne().clickCenter()
+        sleep(2000)
+
+        desc('领取奖励').findOne().clickCenter()    // 第二次 视频广告
+        
+        sleep(45000)
+
+        click(573,1249);
+
+        desc('领取成功').findOne().clickCenter() 
 
 
-/**看视频 */ 
-sleep(2000)
-
-if(text('看广告赚金币').exists()){      // 判断'看广告视频'
-
-    console.log('发现----看广告赚金币')
-    text('看广告赚金币').findOne().clickCenter()    // 点击进入广告查看
-
-    // 获取播放时长
-    // 等待播放时长过后'可领取奖励'
-    // 获取进入下载页面的'返回'按钮
-    // 点击返回
-    // 获取视频播放页面'关闭，按钮、'
-
-    // 点击'关闭，按钮'
-    // 判断是否'再看一个视频额外获得'
-    // 点击'领取奖励',在看一条视频
-
-    // 获取播放时长过后'可领取奖励'
-    // 进入软件下载页面，获取'返回'按钮
-    // 点击返回
-    // 获取视频播放页面'关闭，按钮、'
-
-
-
+    }
 
 }
 
 
+/**看视频 */ 
+sleep(2000)
+if(text('看广告赚金币').exists()){      // 判断'看广告视频'
+
+    console.log('发现----看广告赚金币')
+    text('看广告赚金币').findOne().clickCenter()   // 点击进入广告查看
+    sleep(45000) // 等待一分钟 第一次视频广告
+
+    if(desc('返回').exists()){          // 进入下载页面 
+
+        desc('返回').findOne().clickCenter()
+        sleep(2000)
+
+        desc('关闭 按钮').findOne().clickCenter()
+        sleep(2000)
+
+        desc('领取奖励').findOne().clickCenter() // 第二次 视频广告开始
+        sleep(45000)
+
+        desc('返回').findOne().clickCenter()
+        desc('关闭 按钮').findOne().clickCenter() 
+
+    }
+
+    if(desc('领取成功').exists()){      // 未进入下载页面
+
+        desc('领取成功').findOne().clickCenter()
+        sleep(2000)
+
+        desc('领取奖励').findOne().clickCenter()    // 第二次 视频广告开始
+        sleep(45000)
+
+        click(573,1249);
+
+        desc('领取成功').findOne().clickCenter() 
+
+
+    }
+}
+
+sleep(5000)
+
 
 /**开宝箱 */ 
-// if(text('开宝箱得金币').exists()){      // 判断'看广告视频'
+if(text('开宝箱得金币').exists()){      // 判断'看广告视频'
 
-//     console.log('发现----宝箱')
+    console.log('发现----宝箱')
+    desc('开宝箱得金币').findOne().clickCenter() 
+    sleep(2000)
 
-// }
-
-
-
-
-// // 退出应用
-// sleep(2000)
-// home() // 回到主页
+    desc('看广告视频再赚').findOne().clickCenter() 
+    sleep(45000) // 等待一分钟 第一次视频广告
 
 
-// // 结束当前任务
-// sleep(2000)
-// recents() // 显示任务
-// sleep(2000)
-// swipe(600,1800,600,1000,1000)
-// home() // 回到主页
+    if(desc('返回').exists()){          // 进入下载页面 
 
+        desc('返回').findOne().clickCenter()
+        sleep(2000)
+
+        desc('关闭 按钮').findOne().clickCenter()
+        sleep(2000)
+
+        desc('领取奖励').findOne().clickCenter()    // 第二次 视频广告
+        sleep(45000)
+
+        desc('返回').findOne().clickCenter()
+        desc('关闭 按钮').findOne().clickCenter() 
+
+    }
+
+    if(desc('领取成功').exists()){      // 未进入下载页面
+
+        desc('领取成功').findOne().clickCenter()
+        sleep(2000)
+
+        desc('领取奖励').findOne().clickCenter()    // 第二次 视频广告
+        sleep(45000)
+
+        click(573,1249);
+
+        desc('领取成功').findOne().clickCenter() 
+
+
+    }
+}
+
+
+
+
+// 退出应用
+sleep(2000)
+Tool.closed_app()
