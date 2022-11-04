@@ -1,8 +1,10 @@
 var index= {};
 
+index.on_off = '';  // 循环初始值：true开启
+
 index.start = ()=>{
 
-    while(true){
+    while(index.on_off){
 
         var Task_obj = false;// 请求任务：数据库请求任务详情
     
@@ -25,6 +27,9 @@ index.start = ()=>{
             console.log('执行任务完成ok，心跳一次');
     
         }
+
+        index.on_off = ''; // 接口获取：后台获取
+
     }
 
 }
