@@ -4,9 +4,10 @@ var Tool = require('/sdcard/脚本/Task/script_file/tool.js');
 Tool.open_app('抖音极速版')
 
 
-sleep(6000)// 等待加载页面
+sleep(10000)// 等待加载页面
 swipe(600,1800,600,1000,1000)
 
+sleep(4000)// 等待加载页面
 click(573,2249);// 点击来赚钱
 
 
@@ -19,24 +20,28 @@ if(text('签到提醒').exists()){ // 判断是否'签到提醒'弹出层
 
     console.log('发现-----签到模块')
     click(600,1440);    //点击签到按钮
-    sleep(2000)
+    sleep(4000)
 
-    text('看广告视频再赚').findOne().clickCenter();//判断是否看广告视频再赚
-
-    sleep(50000) // 等待一分钟 第一次视频广告
+    text('看广告视频再赚').findOne().clickCenter();//判断是否看广告视频再赚：点击进入广告
+    sleep(70000) // 等待一分钟 第一次视频广告
 
     if(desc('返回').exists()){          // 进入下载页面 
 
         desc('返回').findOne().clickCenter()
-        sleep(2000)
+        sleep(4000)
 
         desc('关闭 按钮').findOne().clickCenter()
-        sleep(2000)
+        sleep(4000)
 
         desc('领取奖励').findOne().clickCenter() // 第二次 视频广告
         sleep(35000)
 
+        click(573,1249);
+        sleep(2000)
+
         desc('返回').findOne().clickCenter()
+        sleep(2000)
+
         desc('关闭 按钮').findOne().clickCenter() 
 
     }
@@ -51,6 +56,7 @@ if(text('签到提醒').exists()){ // 判断是否'签到提醒'弹出层
         sleep(45000)
 
         click(573,1249);
+        sleep(2000)
 
         desc('领取成功').findOne().clickCenter() 
 
@@ -79,7 +85,12 @@ if(text('看广告赚金币').exists()){      // 判断'看广告视频'
         desc('领取奖励').findOne().clickCenter() // 第二次 视频广告开始
         sleep(45000)
 
+        click(573,1249);
+        sleep(2000)
+
         desc('返回').findOne().clickCenter()
+        sleep(2000)
+
         desc('关闭 按钮').findOne().clickCenter() 
 
     }
@@ -93,7 +104,7 @@ if(text('看广告赚金币').exists()){      // 判断'看广告视频'
         sleep(45000)
 
         click(573,1249);
-
+        sleep(2000)
         desc('领取成功').findOne().clickCenter() 
 
 
@@ -125,7 +136,11 @@ if(text('开宝箱得金币').exists()){      // 判断'看广告视频'
         desc('领取奖励').findOne().clickCenter()    // 第二次 视频广告
         sleep(45000)
 
+        click(573,1249);
+        
         desc('返回').findOne().clickCenter()
+        sleep(2000)
+
         desc('关闭 按钮').findOne().clickCenter() 
 
     }
@@ -140,6 +155,7 @@ if(text('开宝箱得金币').exists()){      // 判断'看广告视频'
 
         click(573,1249);
 
+        sleep(2000)
         desc('领取成功').findOne().clickCenter() 
 
 

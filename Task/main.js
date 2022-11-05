@@ -1,4 +1,4 @@
-var Index = require('/sdcard/脚本/Task/system_file/index.js');
+var index = require('/sdcard/脚本/Task/system_file/index.js');
 
 // 请求版本更新接口
 
@@ -8,7 +8,9 @@ var Index = require('/sdcard/脚本/Task/system_file/index.js');
 
 
 // 执行心跳+任务
-Index.start()
+console.log(index.on_off)   // 打印开关状态
+
+index.start()
 
 
 // 打开应用-启动node服务

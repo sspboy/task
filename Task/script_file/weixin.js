@@ -8,4 +8,6 @@ swipe(600,1800,600,800,1000)
 
 sleep(5000)
 
+// 扫一扫
+
 Tool.closed_app()
