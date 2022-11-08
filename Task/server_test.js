@@ -1,70 +1,50 @@
-"nodejs";
+var task = {};
 
+var android_id= device.getAndroidId(); // 当前设备id
 
-var http= require('http');
-var url = require('url');
-var util = require('util');
+var task_get_api = ''   // 请求任务接口地址
 
+while(true){
 
-http.createServer(function (request, response) {
+    task.result = ''; // 请求任务接口-获取任务;
 
-    // 发送 HTTP 头部 
-    // HTTP 状态值: 200 : OK
-    // 内容类型: text/plain
-    response.writeHead(200, {'Content-Type': 'text/plain'});
+    if(task == true){
 
-
-    // var params = url.parse(request.url, true).query;
-    // console.log(params)
-
-
-    var on_off = true;
-
-    while(on_off){
-
-        
-
-        Task_obj = false;// 请求任务：数据库请求任务详情
-    
-        if(Task_obj == false){  // 任务为空false：等待10秒，再次请求；
+        var thread = threads.start(function(){
 
             var js_url = 'http://douxiaoer-test.oss-cn-hangzhou.aliyuncs.com/script_file/demo.js'
 
             var res = http.get(js_url);
-            console.log(res);             // 获取文件内容
 
-            if(res.statusCode >= 200 && res.statusCode < 300){
+            console.log(res.body.string());             // 获取文件内容
 
-                console.log(res.body.string());             // 获取文件内容
+            // 写入本地文件
 
-            }
-            
-            console.log('任务未空-心跳一次')
+            // 引入本地模块
 
-            console.log('退出循环')
+            // 执行模块   +  存储回调结果
 
-            on_off = false;           // 关闭开关:服务端开关状态--更新为关闭
+            log("子线程-执行任务");
 
-            break
-    
-        }else{      // 任务不为空：执行任务
-    
-            // 加载js脚本 执行脚本>回写结果到数据库
-    
-    
-            console.log('我在勤劳的执行任务ing....');
-    
-            console.log('执行任务完成ok，心跳一次');
-    
-        }
+            sleep(2000)
+
+        })
+
+        //等待该线程完成
+        thread.join();
+
+        //停止线程执行
+        thread.interrupt();
+
+        console.log("完成");
+
+    }else{
+
+        sleep(50000)
+        
+        log("暂无任务");
 
     }
-
-    // 发送响应数据 "Hello World"
-    // response.end('开启任务操作');
+}
 
 
-}).listen('8888');
-
-// 终端打印如下信息
-console.log('Server running at http://127.0.0.1:8888/');
