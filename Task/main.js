@@ -22,7 +22,7 @@ async function HttpGet(request_url) {
     }
 };
 
-// 获取设备端口号；
+/** 请求接口获取设备端口号； */ 
 
 
 // http搭建服务接口
@@ -31,9 +31,8 @@ http.createServer(function (request, response) {
     // 发送 HTTP 头部 // HTTP 状态值: 200 : OK// 内容类型: text/plain
     response.writeHead(200, {'Content-Type': 'text/plain'});
 
-    // 后台通过 url 传参 至 设备服务地址，获取脚本地址；
+    // 后台通过 url 传参 至 设备服务地址，获取脚本地址
     var params = url.parse(request.url, true).query;
-
     console.log(params)
 
     var script_url= 'http://douxiaoer-test.oss-cn-hangzhou.aliyuncs.com/script_file/demo.js'
@@ -42,8 +41,8 @@ http.createServer(function (request, response) {
     HttpGet(script_url).then((res)=>{    // 获取任务脚本内容
         
         // 读取任务文件地址,获取脚本内容；
-
-        // 脚本内容保存到本地文件；
+        // 创建本地文件；
+        // 内容保存到本地文件；
         fs.writeFile('try4.txt', 'HelloWorld', function(err) {})
 
         // 返回路径、名称；
