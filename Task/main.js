@@ -1,16 +1,24 @@
 "nodejs";
 
-const url = require("url");    // url
+const { accessibility } = require('accessibility'); // 启用无障碍服务
 
-const {device} = require("device");  // 设备
+const url = require("url");             // url
 
-const http = require("http");    // 服务模块
+const {device} = require("device");     // 设备
 
-const axios = require("axios");  // http异步请求
+const http = require("http");           // 服务模块
 
-const engines = require("engines");  // 脚本引擎
+const axios = require("axios");         // http异步请求
 
-const fs = require("fs");           // 文件操作
+const engines = require("engines");     // 脚本引擎
+
+const fs = require("fs");               // 文件操作
+
+
+
+
+// 启动无障碍模式
+accessibility.enableService({toast:true});
 
 // 构建网络请求方法
 async function HttpGet(request_url) {
@@ -26,6 +34,11 @@ async function HttpGet(request_url) {
 
 
 // http搭建服务接口
+
+const port =3000;//定义端口号
+
+const ip = '0.0.0.0';// 定义ip
+
 http.createServer(function (request, response) {
   
     // 发送 HTTP 头部 // HTTP 状态值: 200 : OK// 内容类型: text/plain
@@ -72,7 +85,7 @@ http.createServer(function (request, response) {
     // response.end('任务完成');
 
 
-}).listen(8888);
+}).listen(port,ip);
 
 // 终端打印如下信息
 console.log('Server running at http://127.0.0.1:8888/');
