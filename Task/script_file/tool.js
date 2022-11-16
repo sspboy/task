@@ -8,7 +8,7 @@ Tool.open_app=(appname)=>{  // 打开某应用
 
 };
 
-// 关闭应用
+// 前台关闭当前应用
 Tool.closed_app=()=>{  
     sleep(2000)
     home() // 回到主页
@@ -23,6 +23,38 @@ Tool.closed_app=()=>{
     sleep(2000)
     home() // 回到主页
 
+};
+
+// 截图方法
+Tool.screenshot=(img_name)=>{
+
+    // 截图功能>>保存到指定文件夹
+    threads.start(function () {
+        sleep(2000)
+        click(783, 2200)
+    });
+
+    requestScreenCapture(false);// 请求竖屏截图
+
+    sleep(1000)
+
+    captureScreen('/sdcard/脚本/'+ img_name);   // 截图
+
+    // 查看文件是否存在
+
+    // 返回截图结果true、false
+
+    return ''
+
+};
+
+// 删除应用
+Tool.uninstallapp=(_name)=>{
+
+    // var package_name = getPackageName(_name); //返回"com.tencent.mobileqq"
+
+    // app.uninstall(package_name);
+
 }
 
 
@@ -32,5 +64,8 @@ Tool.getRandomInt=(min, max)=>{
         return num * 1000
         
 };
+
+
+
 
 module.exports = Tool;
