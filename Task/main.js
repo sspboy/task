@@ -14,11 +14,15 @@ const engines = require("engines");     // 脚本引擎
 
 const fs = require("fs");               // 文件操作
 
+const express = require('express');       // restapi
+
+var bodyParser = require('body-parser');    // post接口解析方法
+
+const app = express();                      // 构建app服务
+
+app.use(bodyParser.json());                 // json 绑定解析方法
 
 
-
-// 启动无障碍模式
-accessibility.enableService({toast:true});
 
 // 构建网络请求方法
 async function HttpGet(request_url) {
@@ -30,20 +34,20 @@ async function HttpGet(request_url) {
     }
 };
 
-/** 请求接口获取设备端口号； */ 
+// 启动无障碍模式
+accessibility.enableService({toast:true});
 
-
-// http搭建服务接口
 
 const port =3000;//定义端口号
 
 const ip = '0.0.0.0';// 定义ip
 
-http.createServer(function (request, response) {
-  
-    // 发送 HTTP 头部 // HTTP 状态值: 200 : OK// 内容类型: text/plain
-    response.writeHead(200, {'Content-Type': 'text/plain'});
-
+// 常规任务
+app.get('/tasktest', function (request, response) {
+    response.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
+    let text = {"res":"任务完成"}
+    response.end(JSON.stringify(text));
+    
     // 后台通过 url 传参 至 设备服务地址，获取脚本地址
     var params = url.parse(request.url, true).query;
     console.log(params)
@@ -80,15 +84,35 @@ http.createServer(function (request, response) {
 
 
     })
+
+})
+
+// 添加脚本接口
+app.get('/addjs', function (request, response) {
+    response.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
+    let text = {"res":"脚本javascript"}
+    response.end(JSON.stringify(text));
+    var task_list= [1,2,3,4,5]
+    // 将12345翻译为方法写入js文件中
+    // 载入js文件
+    // 脚本引擎运行js文件
+
+
     
-    // 发送响应数据 "Hello World"
-    // response.end('任务完成');
 
 
-}).listen(port,ip);
+})
 
-// 终端打印如下信息
-console.log('Server running at http://127.0.0.1:8888/');
+app.post('/push',function(request,response){
+    response.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
+    console.log(request.body)
+
+
+    response.end('true');
+
+})
+
+app.listen(port,ip);
 
 
 
