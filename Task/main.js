@@ -1,120 +1,84 @@
 "nodejs";
 
-const { accessibility } = require('accessibility'); // 启用无障碍服务
-
 const url = require("url");             // url
-
 const {device} = require("device");     // 设备
-
-const http = require("http");           // 服务模块
-
-const axios = require("axios");         // http异步请求
-
 const engines = require("engines");     // 脚本引擎
-
-const fs = require("fs");               // 文件操作
-
-const express = require('express');       // restapi
-
-var bodyParser = require('body-parser');    // post接口解析方法
-
+const express = require('express');     // restapi
+const bodyParser = require('body-parser');  // post接口解析方法
 const app = express();                      // 构建app服务
 
-app.use(bodyParser.json());                 // json 绑定解析方法
+const escape = require("./system_file/escape");   // 脚本保存本地todo—list.js
 
+app.use(bodyParser.json());                 // body-parser中间件支持json解析
 
+app.use(bodyParser.urlencoded({             // body-parser中间件支持x-www-form-urlencoded解析
+    extended:true
+}));
 
-// 构建网络请求方法
-async function HttpGet(request_url) {
-    try {
-        const res = await axios.get(request_url);
-        return res.data
-    } catch (e) {
-        console.error(e);
-    }
-};
+escape.Main();              /** 获取无障碍模式 */
 
-// 启动无障碍模式
-accessibility.enableService({toast:true});
+// escape.Login_device()    /** 设备登录&注册 */ // 自动分配 设备端口规则：：所有端口中最大的一个端口号+1为新的设备端口号
 
-
-const port =3000;//定义端口号
-
-const ip = '0.0.0.0';// 定义ip
-
-// 常规任务
-app.get('/tasktest', function (request, response) {
-    response.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
-    let text = {"res":"任务完成"}
-    response.end(JSON.stringify(text));
-    
-    // 后台通过 url 传参 至 设备服务地址，获取脚本地址
-    var params = url.parse(request.url, true).query;
-    console.log(params)
-
-    var script_url= 'http://douxiaoer-test.oss-cn-hangzhou.aliyuncs.com/script_file/demo.js'
-    var script_name = '';
-
-    HttpGet(script_url).then((res)=>{    // 获取任务脚本内容
-        
-        // 读取任务文件地址,获取脚本内容；
-        // 创建本地文件；
-        // 内容保存到本地文件；
-        fs.writeFile('try4.txt', 'HelloWorld', function(err) {})
-
-        // 返回路径、名称；
-
-        console.log(device.androidId)   // 获取设备id
-        console.log(res)
-
-    }).then(()=>{
-
-        // 脚本引擎执行pro8脚本
-        const exc_js = engines.execScriptFile('script_file/douyin.js');
-        exc_js.on('success',()=>{
-            console.log('脚本运行结束')
-            // process.exit() // 全部退出脚本
-        })
-
-
-    }).then(()=>{
-
-        // 回写任务结果到后台
-        // 执行完毕回调存储结果
-
-
-    })
-
+/** 当前设备状态：：0=空闲，1=工作中 */ 
+escape.HttpGet(escape.config.device_status_api).then((res)=>{
+    console.log('设备状态：' + res.status)
 })
+
+/** 变更设备状态为【工作中1】 */
+/** 变更设备状态为【空闲中0】 */
+
 
 // 添加脚本接口
 app.get('/addjs', function (request, response) {
+
     response.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
     let text = {"res":"脚本javascript"}
+    console.log(text)
     response.end(JSON.stringify(text));
-    var task_list= [1,2,3,4,5]
-    // 将12345翻译为方法写入js文件中
-    // 载入js文件
-    // 脚本引擎运行js文件
-
-
-    
-
 
 })
 
 app.post('/push',function(request,response){
-    response.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
+
     console.log(request.body)
 
+    var js_text = request.body;// 获取post参数
 
+    escape.todo(js_text.result); // 写入todo_list.js文件
+
+    const exc_js = engines.execScriptFile('./todo_list.js');    // 脚本引擎执行pro8脚本
+
+    exc_js.on('success',()=>{
+
+        console.log('脚本运行结束')
+
+    })
+    
+    exc_js.engineOrNull?.forceStop();// 结束引擎
+    // 更新设备为繁忙
+    // 解析任务
+    // 将任务执行语句写入本地
+    // 引擎执行本地脚本
+    // 执行结果保存
+    // 变更设备为空闲
     response.end('true');
 
 })
 
-app.listen(port,ip);
+const android_id = device.androidId;  // 设备id
 
+const ip = '0.0.0.0';   // 定义ip
 
+// const port_api_url = escape.config.loaclhost + '/device/getport?android_id=' + android_id; // 请求端口号接口url
 
+escape.HttpGet(escape.config.device_port_api).then((port_num)=>{
+
+    console.log('端口号：' + port_num.port)
+
+    app.listen(port_num,ip);
+
+    console.log('Server running');
+
+})
 
 // 补充说明：：脚本引擎必须再系统文件main.js中运行，而不是再脚本文件中运行

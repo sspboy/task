@@ -1,4 +1,9 @@
 
+var name= app.getPackageName('抖音极速版')
+sleep(1000)
+app.launch(name)
+
+
 // var app_name = app.versionName
 
 

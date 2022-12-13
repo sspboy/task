@@ -1,0 +1,8 @@
+切换到虚拟环境：
+
+shipengdeMacBook-Pro:Group_control shipengshao$ source evn/bin/activate
+
+启动本地后台服务：
+
+
+(evn) shipengdeMacBook-Pro:Group_control shipengshao$ python app.py
