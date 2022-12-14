@@ -66,7 +66,7 @@ Tool.uninstall_app=(_name)=>{
 }
 
 
-// 截图方法：输入截取成功图片名称
+// 后台截图方法：输入图片名称保存至【Task】文件夹
 Tool.screenshot=(img_name)=>{
 
     // 截图功能>>保存到指定文件夹
@@ -79,7 +79,7 @@ Tool.screenshot=(img_name)=>{
 
     sleep(1000)
 
-    captureScreen('/sdcard/脚本/'+ img_name);   // 截图
+    captureScreen('/sdcard/脚本/Task/'+ img_name);   // 截图
 
     // 查看文件是否存在
 
@@ -88,6 +88,17 @@ Tool.screenshot=(img_name)=>{
     return 'true'
 
 };
+
+// 前台截图方法：保存到相册
+Tool.scrshot_img=()=>{
+
+    quickSettings()// 快捷栏
+    sleep(1000)
+    click(200,1522)// 点击截图按钮
+    sleep(1000)
+
+}
+
 
 
 // 微信扫码：
@@ -124,9 +135,9 @@ Tool.press_fun =(x,y,duration)=>{
 }
 
 // 微信支付-输入密码
-Tool.pay_pass_word = ()=>{
+Tool.weixin_pay_pass_word = ()=>{
 
-    sleep(8000) // 等待加载微信支付界面
+    sleep(5000) // 等待加载微信支付界面
     // 输入支付密码
     click(186,1800)
     sleep(2000)
