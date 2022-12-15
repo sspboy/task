@@ -6,7 +6,6 @@ var SBZ={}
 
 /** 赏帮赚-打开应用 开始 */
 //Tool.open_app('赏帮赚')
-//sleep(3000)
 /** 赏帮赚-打开应用 结束 */
 
 
@@ -42,16 +41,15 @@ SBZ.select_title=(title)=>{
 }
 
 
-// 详情页面 我要报名
 SBZ.sign_up=()=>{
+    // 详情页面 点击我要报名
     sleep(3000)
     text('我要报名').findOne().clickCenter()
 }
 
 
-
-// 保存二维码
 SBZ.save_code=()=>{
+    // 点击保存二维码
     sleep(3000)
     text('保存扫码').findOne().clickCenter()
 }
@@ -63,22 +61,71 @@ SBZ.save_code=()=>{
 // Tool.screenshot('haha.png')
 
 
-// 上传任务验证图片1\2\3上
-SBZ.update_img=()=>{
+SBZ.update_img_one=()=>{
+    // 上传任务验证图片-第一张位置
     sleep(3000)
     text('上传数据图').findOne().clickCenter()
+    sleep(1000)
+    click(130,420)
+    sleep(1000)
+    click(980,170)
+    sleep(1000)
+    click(930,2280)
+
+}
+
+SBZ.update_img_two=()=>{
+    // 上传任务验证图片-第二张位置
+    sleep(3000)
+    text('上传数据图').findOne().clickCenter()
+    sleep(1000)
+    click(130,420)
+    sleep(1000)
+    click(980,170)
 }
 
 
-// 搜索任务id，进入任务详情??
+SBZ.update_img_Three=()=>{
+    // 上传任务验证图片-第三张位置
+    sleep(3000)
+    text('上传数据图').findOne().clickCenter()
+    sleep(1000)
+    click(130,420)
+    sleep(1000)
+    click(980,170)
+}
 
-// 复制口令？？
+
+// 复制链接
+SBZ.copy_link=()=>{
+    sleep(3000)
+    text('复制链接').findOne().clickCenter()
+
+}
+SBZ.open_link=()=>{
+    // 打开链接
+    sleep(3000)
+    text('打开链接').findOne().clickCenter()
+    sleep(6000)
+}
+
+SBZ.phone_num=()=>{
+    // 输入手机号
+    sleep(3000)
+    text('请输入').findOne().setText('18368831329')
+}
 
 
-// 提交任务，等待审核
+SBZ.submit_task=()=>{
+    // 提交任务，等待审核
+    sleep(3000)
+    text('提交任务').findOne().clickCenter()
+    sleep(2000)
+}
+Tool.sao_alipay()
 
 // 退出脚本
 
 // 打开链接：默认浏览器
 
-// 微信扫码
+// 搜索任务id，进入任务详情??

@@ -96,7 +96,6 @@ Tool.scrshot_img=()=>{
     sleep(1000)
     click(200,1522)// 点击截图按钮
     sleep(1000)
-
 }
 
 
@@ -120,6 +119,35 @@ Tool.sao_weixin=()=>{
     // 点击相册第一张图片位置
     click(400,380)
     sleep(5000)
+}
+
+// 支付宝扫码
+Tool.sao_alipay=()=>{
+
+    // 打开支付宝
+    var name= app.getPackageName('支付宝')
+    sleep(2000)
+    app.launch(name)
+
+    // 点击扫码按钮
+    sleep(4000)
+    click(155,310)
+
+    // 点相册
+    sleep(2000)
+    click(940,1960)
+
+    // 点第一张图片
+    sleep(2000)
+    click(530,460)
+
+    // 点击确认
+    sleep(2000)
+    click(996,148)
+
+    sleep(5000)
+
+    
 }
 
 // 随机等待： 两个数之间 随机一个整数*1000 毫秒单位
