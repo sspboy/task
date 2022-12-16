@@ -122,10 +122,36 @@ SBZ.submit_task=()=>{
     text('提交任务').findOne().clickCenter()
     sleep(2000)
 }
-Tool.sao_alipay()
 
-// 退出脚本
+
+// 根据id搜索任务，进入任务详情，需要信用值30积分
+SBZ.id_select_task=(value)=>{
+
+    sleep(3000)
+    click(350,200)  // 点击搜索框
+    
+    setClip(value); // 设置剪贴版内容
+    click(350,180)  // 点击粘贴
+    press(350,180, 4000) // 长按输入框
+
+    sleep(2000)
+    click(225,370)  // 点击粘贴
+
+    sleep(1000)
+    click(980,187)// 点击搜索
+
+    sleep(4000)
+    click(372,336)// 点击列表进入详情
+
+    sleep(3000)
+    click(480,2250) // 点击安装应用
+
+
+}
+
+Tool.install_app('微博')
+
+
+
 
 // 打开链接：默认浏览器
-
-// 搜索任务id，进入任务详情??

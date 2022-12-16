@@ -1,3 +1,4 @@
+
 var Tool={}
 
 // 开启应用：输入应用中文名称，开启应用；
@@ -28,24 +29,34 @@ Tool.closed_app=()=>{
 
 };
 
-// 安装应用
+// 华为市场>>>安装应用
 Tool.install_app=(_name)=>{
 
     // 打开应用市场
     var name = app.getPackageName('华为应用市场');
     app.launch(name)
-    sleep(6000)
+    sleep(8000)
+    
+    click(280,350) // 点击搜索框进入搜索页面
 
+    sleep(2000)
+    className("EditText").findOne(4000).setText(_name) // 输入输入应用关键字
+
+    
     // 搜索应用名称
-    className("LinearLayout").findOne(2000).click() // 点击搜索框
     sleep(2000)
 
-    className("EditText").findOne(2000).setText(_name) // 输入框输入应用关键字
+    text("搜索").findOne(2000).click() // 点击搜索框
 
-    // 点击安装
+    // 点击进入应用详情
+    sleep(3000)
     if(text(_name).exists()){
-        text(_name).findOnce(1).click()
+        text(_name).findOnce(1).clickCenter()
     }
+
+    sleep(3000)
+    click(500,2250)// 点击安装应用
+
 
 }
 
@@ -182,7 +193,7 @@ Tool.weixin_pay_pass_word = ()=>{
 
 }
 
-// 红赏吧>>>>粘贴文本到非编辑输入框
+// 红赏吧>>设置剪贴版内容>>粘贴文本到非编辑输入框
 Tool.copy=(value)=>{
 
     // 搜索指定任务ID，领取任务----开始
@@ -194,5 +205,23 @@ Tool.copy=(value)=>{
 
 }
 
+// 浏览器打开指定链接
+Tool.open_link=(url)=>{
+
+    app.openUrl(url)
+
+}
+
+
+// 发邮件
+Tool.push_email=(mail_list,title,textconter)=>{
+
+    app.sendEmail({
+        email: mail_list,   // 邮箱地址list:["10086@qq.com", "10001@qq.com"]
+        subject: title,     // "这是一个邮件标题"
+        text: textconter    //"这是邮件正文"
+    });
+
+}
 
 module.exports = Tool;
