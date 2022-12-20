@@ -110,57 +110,6 @@ Tool.scrshot_img=()=>{
 }
 
 
-
-// 微信扫码：
-Tool.sao_weixin=()=>{
-    // 打开微信
-    var name= app.getPackageName('微信')
-    sleep(2000)
-    app.launch(name)
-    sleep(2000)
-    // 点击右上角加号
-    click(1000,180)
-    sleep(2000)
-    // 点击扫一扫
-    click(820,630)
-    sleep(2000)
-    // 点击相册
-    click(950,2000)
-    sleep(2000)
-    // 点击相册第一张图片位置
-    click(400,380)
-    sleep(5000)
-}
-
-// 支付宝扫码
-Tool.sao_alipay=()=>{
-
-    // 打开支付宝
-    var name= app.getPackageName('支付宝')
-    sleep(2000)
-    app.launch(name)
-
-    // 点击扫码按钮
-    sleep(4000)
-    click(155,310)
-
-    // 点相册
-    sleep(2000)
-    click(940,1960)
-
-    // 点第一张图片
-    sleep(2000)
-    click(530,460)
-
-    // 点击确认
-    sleep(2000)
-    click(996,148)
-
-    sleep(5000)
-
-    
-}
-
 // 随机等待： 两个数之间 随机一个整数*1000 毫秒单位
 Tool.getRandomInt=(min, max)=>{
         let num = Math.floor(Math.random() * (max - min)) + min;
@@ -173,25 +122,6 @@ Tool.press_fun =(x,y,duration)=>{
     press(x, y, duration)
 }
 
-// 微信支付-输入密码
-Tool.weixin_pay_pass_word = ()=>{
-
-    sleep(5000) // 等待加载微信支付界面
-    // 输入支付密码
-    click(186,1800)
-    sleep(2000)
-    click(550,1800)
-    sleep(2000)
-    click(880,1800)
-    sleep(2000)
-    click(220,1960)
-    sleep(2000)
-    click(520,1960)
-    sleep(2000)
-    click(880,1960)
-    sleep(2000)
-
-}
 
 // 红赏吧>>设置剪贴版内容>>粘贴文本到非编辑输入框
 Tool.copy=(value)=>{
